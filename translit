@@ -1,0 +1,74 @@
+#!/bin/sh
+# transliterate input from Serbian Cyrillic to Latin
+# Usage: translit [ file ... ]
+# Requires: AWK that supports UTF-8 (looks for GNU AWK)
+# Author: Vladimir Vrzić
+#
+# translit is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2, or (at your option)
+# any later version.
+
+searchpath() {
+# Usage: searchpath progname path
+  IFS=${PATH_SEPARATOR-":"} prog=':'
+  for dir in $2; do
+    # try `progname' with all well known extensions
+    for ext in '' '.exe'; do
+      try="$dir/$1$ext"
+      test -f "$try" && test -x "$try" && prog="$try" && break
+    done
+    test "$prog" = ":" || break
+  done
+  echo "$prog"
+}
+
+AWK=$(searchpath gawk "$PATH")
+if [ "$AWK" = ":" ]; then
+  echo >&2 "$0: Cannot find gawk in PATH"
+  exit 1
+fi
+
+awkscript='
+BEGIN {
+  m["А"] = "A" ; m["а"] = "a"
+  m["Б"] = "B" ; m["б"] = "b"
+  m["В"] = "V" ; m["в"] = "v"
+  m["Г"] = "G" ; m["г"] = "g"
+  m["Д"] = "D" ; m["д"] = "d"
+  m["Ђ"] = "Đ" ; m["ђ"] = "đ"
+  m["Е"] = "E" ; m["е"] = "e"
+  m["Ж"] = "Ž" ; m["ж"] = "ž"
+  m["З"] = "Z" ; m["з"] = "z"
+  m["И"] = "I" ; m["и"] = "i"
+  m["Ј"] = "J" ; m["ј"] = "j"
+  m["К"] = "K" ; m["к"] = "k"
+  m["Л"] = "L" ; m["л"] = "l"
+  m["Љ"] = "Lj"; m["љ"] = "lj"
+  m["М"] = "M" ; m["м"] = "m"
+  m["Н"] = "N" ; m["н"] = "n"
+  m["Њ"] = "Nj"; m["њ"] = "nj"
+  m["О"] = "O" ; m["о"] = "o"
+  m["П"] = "P" ; m["п"] = "p"
+  m["Р"] = "R" ; m["р"] = "r"
+  m["С"] = "S" ; m["с"] = "s"
+  m["Т"] = "T" ; m["т"] = "t"
+  m["Ћ"] = "Ć" ; m["ћ"] = "ć"
+  m["У"] = "U" ; m["у"] = "u"
+  m["Ф"] = "F" ; m["ф"] = "f"
+  m["Х"] = "H" ; m["х"] = "h"
+  m["Ц"] = "C" ; m["ц"] = "c"
+  m["Ч"] = "Č" ; m["ч"] = "č"
+  m["Џ"] = "Dž"; m["џ"] = "dž"
+  m["Ш"] = "Š" ; m["ш"] = "š"
+  FS=""
+}
+{
+  for (i = 1; i <= NF; i++)
+    if (m[$i]) printf("%s", m[$i])
+    else printf("%s", $i)
+  printf("\n")
+}
+'
+
+exec $AWK "$awkscript" "$@"
