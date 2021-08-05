@@ -1,7 +1,13 @@
-= translit - transliterate input from Serbian Cyrillic to Latin
+= translit - Serbian text transliteration tools
+
+Tools included in this package:
+
+- cyr2lat - transliterates input from UTF-8 Serbian Cyrillic to Serbian Latin
+- lat2ascii - transliterates input from UTF-8 Serbian Latin to 7-bit ASCII
 
 == Synopsis
-translit [file ...]
+cyr2lat [file ...]
+lat2ascii [file ...]
 
 == Requirements
 AWK that supports UTF-8.

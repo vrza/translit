@@ -1,6 +1,6 @@
 #!/bin/sh
 # transliterate input from Serbian Cyrillic to Latin
-# Usage: translit [ file ... ]
+# Usage: cir2lat [ file ... ]
 # Requires: AWK that supports UTF-8 (looks for GNU AWK)
 # Author: Vladimir Vrzić
 #
