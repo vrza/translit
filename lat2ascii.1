@@ -9,6 +9,7 @@
 .Sh FUNCTION
 .Nm
 reads lines of UTF-8 Serbian Latin text from input and writes corresponding lines of 7-bit ASCII text to standard output. This transformation is lossy, as multiple Serbian Latin characters are mapped to each of ASCII characters "c", "s", and "z".
+
 lat2ascii requires AWK with UTF-8 support. It will search the PATH for `gawk'.
 .Sh AUTHOR
 .Nm Written by Vladimir Vrzić
