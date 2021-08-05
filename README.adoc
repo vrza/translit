@@ -6,8 +6,8 @@ Tools included in this package:
 - lat2ascii - transliterates input from UTF-8 Serbian Latin to 7-bit ASCII
 
 == Synopsis
-cyr2lat [file ...]
-lat2ascii [file ...]
+ cyr2lat [file ...]
+ lat2ascii [file ...]
 
 == Requirements
 AWK that supports UTF-8.
