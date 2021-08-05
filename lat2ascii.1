@@ -1,0 +1,20 @@
+.Dd August 5, 2021
+.Dt LAT2ASCII 1
+.Os
+.Sh NAME
+.Nm lat2ascii
+.Nd transliterates input from UTF-8 Serbian Latin to 7-bit ASCII
+.Sh USAGE
+.Nm lat2ascii \(lB file ... \(rB
+.Sh FUNCTION
+.Nm
+reads lines of UTF-8 Serbian Latin text from input and writes corresponding lines of 7-bit ASCII text to standard output. This transformation is lossy, as multiple Serbian Latin characters are mapped to each of ASCII characters "c", "s", and "z".
+lat2ascii requires AWK with UTF-8 support. It will search the PATH for `gawk'.
+.Sh AUTHOR
+.Nm Written by Vladimir Vrzić
+.Sh LICENSE
+.Nm
+is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 2, or (at your option)
+any later version.
