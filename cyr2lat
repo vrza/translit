@@ -29,7 +29,7 @@ if [ "$AWK" = ":" ]; then
   exit 1
 fi
 
-awkscript='
+awk_cyr2lat_map='
 BEGIN {
   m["А"] = "A" ; m["а"] = "a"
   m["Б"] = "B" ; m["б"] = "b"
@@ -63,6 +63,18 @@ BEGIN {
   m["Ш"] = "Š" ; m["ш"] = "š"
   FS=""
 }
+'
+awk_lat2ascii_map='
+BEGIN {
+  m["Č"] = "C" ; m["č"] = "c"
+  m["Ć"] = "C" ; m["ć"] = "c"
+  m["Đ"] = "Dj"; m["đ"] = "dj"
+  m["Š"] = "S" ; m["š"] = "s"
+  m["Ž"] = "Z" ; m["ž"] = "z"
+  FS=""
+}
+'
+awk_each_line='
 {
   for (i = 1; i <= NF; i++)
     if (m[$i]) printf("%s", m[$i])
@@ -71,4 +83,9 @@ BEGIN {
 }
 '
 
-exec $AWK "$awkscript" "$@"
+awk_begin="$awk_cyr2lat_map"
+if [ "$(basename "$0")" == 'lat2ascii' ]; then
+  awk_begin="$awk_lat2ascii_map"
+fi
+
+exec $AWK "$awk_begin $awk_each_line" "$@"
