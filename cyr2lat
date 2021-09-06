@@ -1,7 +1,14 @@
 #!/bin/sh
-# transliterate input from Serbian Cyrillic to Latin
-# Usage: cir2lat [ file ... ]
+# translit - Serbian alphabet transilteration
+
+# transliterate input from UTF-8 Serbian Cyrillic to Latin:
+# cyr2lat [ file ... ]
+#
+# transliterate input from UTF-8 Serbian Latin to 7-bit ASCII:
+# lat2ascii [ file ... ]
+#
 # Requires: AWK that supports UTF-8 (looks for GNU AWK)
+#
 # Author: Vladimir Vrzić
 #
 # translit is free software; you can redistribute it and/or modify
