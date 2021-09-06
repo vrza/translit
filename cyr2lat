@@ -84,7 +84,7 @@ awk_each_line='
 '
 
 awk_begin="$awk_cyr2lat_map"
-if [ "$(basename "$0")" == 'lat2ascii' ]; then
+if [ "$(basename "$0")" = 'lat2ascii' ]; then
   awk_begin="$awk_lat2ascii_map"
 fi
 
